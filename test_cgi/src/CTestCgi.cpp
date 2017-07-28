@@ -35,7 +35,7 @@ void CTestCgi::SetRetMsg(CStr2Map& iodat)
 
     m_outParams["aaa"]  = "111";
     m_outParams["bbb"]  = "222";
-    //m_outParams["ccc"]  = "输出";
+    m_outParams["ccc"]  = "输出";
     //m_outParams["retcode"]  = "0";
     //m_outParams["retmsg"]   = "success";
 
