@@ -2,14 +2,24 @@
 #define _CTRANS_H_HEADER_INCLUDED_ 1
 
 #include <stdlib.h>
-#include "CftLogger.h"
 #include <curl/curl.h>
+#include <sstream>
+#include "CftLogger.h"
 #include "CStringMap.h"
 #include "CStringArray.h"
 #include "CTools.h"
-#include <sstream>
+#include "CExp.h"
+#include "transxmlcfg.h"
+#include "xmlHelper.h"
+
+extern CCftLogger* gPtrSysLog;
+extern CCftLogger* gPtrAppLog;
+extern string g_strTid;
 
 typedef map<string, string> CStr2Map;
+
+#define CONF_ROOT      "../../conf"
+#define XML_CONF_FILE         CONF_ROOT"/paycgi.conf"
 
 class CTrans
 {

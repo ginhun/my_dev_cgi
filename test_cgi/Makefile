@@ -1,7 +1,13 @@
 
-include ../cgiBase.mk
+AP_PATH     = ..
+OPEN_COMMON = $(AP_PATH)/open_common
+SRC         = ./src
+ENTRY       = ./entry
+BIN         = ./bin
 
-TARGET = test.cgi
+include $(AP_PATH)/cgiBase.mk
+
+TARGET      = test.cgi
 INTALL_PATH = /data/wwwroot/fastcgi_demo/cgi-bin/v2.0/
 
 INCLUDE +=
@@ -13,7 +19,7 @@ CFLAGS +=
 all = $(BIN)/$(TARGET)
 
 $(all): $(SRC_OBJS) $(ENTRY_OBJS)
-	$(CXX) -o $@ $(CFLAGS) $^ $(LIBS) $(INCLUDE)
+	$(CXX) -o $@ $(CFLAGS2) $^ $(LIBS) $(INCLUDE)
    
 install:
 	cp $(all) $(INTALL_PATH) 

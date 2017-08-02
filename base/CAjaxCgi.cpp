@@ -18,11 +18,12 @@
 
 
 using namespace std;
+
 /*
  * 全局变量
  */
-CCftLogger* gPtrSysLog = NULL; // 日志文件指针
-CCftLogger* gPtrAppLog = NULL; // 日志文件指针
+CCftLogger* gPtrSysLog = NULL;
+CCftLogger* gPtrAppLog = NULL;
 string g_strTid = "";
 
 
@@ -34,24 +35,29 @@ CAjaxCgi::CAjaxCgi(void)
 
 	try
 	{
-		FetchQueryString();
+        FetchHttpEnv();
+		
+        FetchQueryString();
 
         CreateHandler();
 
-		gPtrAppLog->debug("tid=%s(%s,%s:%d)", g_strTid.c_str(), __func__, __FILE__, __LINE__);
+		gPtrAppLog->debug("tid=[%s] (%s,%s:%d)", g_strTid.c_str(), __func__, __FILE__, __LINE__);
 
 		CommitTrans();
 	} 
 	catch (int iCode)
 	{
+        CCGITools::ProcInterface(m_mIODat);
 	} 
 	catch (CTrsExp &exp)
 	{
+        CCGITools::ProcInterface(m_mIODat);
 		m_mIODat["retcode"] = exp.retcode;
 		m_mIODat["retmsg"] = exp.retmsg;
 	} 
 	catch (...)
 	{
+        CCGITools::ProcInterface(m_mIODat);
 		m_mIODat["retcode"] = "9999";
 		m_mIODat["retmsg"] = "系统繁忙,请稍候重试";
 	}
@@ -98,6 +104,21 @@ void CAjaxCgi::InitLog(void)
 	gPtrAppLog->debug("Enter %s(%s:%d)", __func__, __FILE__, __LINE__);
 }
 
+void CAjaxCgi::FreeLog(void)
+{
+    if( NULL != gPtrSysLog )
+    {   
+        delete gPtrSysLog;
+        gPtrSysLog = NULL;
+    }
+    
+    if( NULL != gPtrAppLog )
+    {   
+        delete gPtrAppLog;
+        gPtrAppLog = NULL;
+    }
+}
+
 CAjaxCgi::~CAjaxCgi(void)
 {
     // 输出返回信息
@@ -119,15 +140,11 @@ CAjaxCgi::~CAjaxCgi(void)
 			__LINE__, g_strTid.c_str(), calltime);
 	gPtrAppLog->debug("Leave ~CAjaxCgi(%s:%d) tid=[%s] cost[%08lld]", __FILE__,
 			__LINE__, g_strTid.c_str(), calltime);
+
+    FreeLog();
 }
 
 int CAjaxCgi::FetchHttpEnv(void)
-{
-	TRACE_FUNC();
-	return ROK;
-}
-
-int CAjaxCgi::FetchQueryString(void)
 {
 	TRACE_FUNC();
 
@@ -135,8 +152,28 @@ int CAjaxCgi::FetchQueryString(void)
     char **pp_env;
     for( pp_env = environ; *pp_env; pp_env++ )
     {   
-        GetParam(*pp_env, m_mIODat);
+        GetParam(*pp_env, m_mEnv);
     }
+
+    //int i = 1;
+    //for(CStr2Map::iterator it = m_mEnv.begin(); it != m_mEnv.end(); ++it,++i )
+    //{ 
+    //    gPtrAppLog->debug("(%s:%d) i=[%d],key=[%s],value=[%s]", __FILE__,__LINE__, i, it->first.c_str(), it->second.c_str());
+    //}
+	
+    return ROK;
+}
+
+int CAjaxCgi::FetchQueryString(void)
+{
+	TRACE_FUNC();
+
+    CStringMap qryStrMap;
+    qryStrMap.SnapElement(m_mEnv["QUERY_STRING"]);
+    m_mIODat = qryStrMap;
+
+    m_mIODat["ENV_Accept"] = m_mEnv["HTTP_ACCEPT"];
+    m_mIODat["ENV_Lang"] = m_mEnv["HTTP_ACCEPT_LANGUAGE"];
 
 	return 0;
 }
@@ -203,7 +240,7 @@ void CAjaxCgi::PrintXmlByMap()
     }
     sstr << "</root>";
 
-    gPtrAppLog->debug("[%s %d] out_str=[%s] ", __FILE__, __LINE__, sstr.str().c_str());
+    gPtrAppLog->debug("[%s:%d] out_str=[%s] ", __FILE__, __LINE__, sstr.str().c_str());
     cout << sstr.str() << endl;
 }
 

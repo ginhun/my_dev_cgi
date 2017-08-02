@@ -1,7 +1,5 @@
 #include "CTrans.h"
 
-extern CCftLogger*   gPtrSysLog;            // ÈÕÖ¾ÎÄ¼şÖ¸Õë
-extern CCftLogger*   gPtrAppLog;
 
 const string CTrans::LOG_CONFIG_FILE_PATH = "../../conf/log4cpp.properties";
 
@@ -17,7 +15,14 @@ CTrans::~CTrans()
 
 int CTrans::LoadConfigure()
 {
-	//¼ÓÔØ×ÔÉíÒµÎñµÄÅäÖÃÎÄ¼ş
+    if( LoadCfg(XML_CONF_FILE) != 0 )
+    {
+        string errmsg = "read conf file[" + string(XML_CONF_FILE) + "] fail!";
+        gPtrAppLog->debug("(%s:%d:%s) %s", __FILE__, __LINE__, __func__, errmsg.c_str());
+        throw( CTrsExp(9999, "è¯»å–é…ç½®æ–‡ä»¶å¤±è´¥!"));
+    }
+
+	//åŠ è½½è‡ªèº«ä¸šåŠ¡çš„é…ç½®æ–‡ä»¶
 	LoadBusiConfig();
 
 	return 0;
@@ -43,7 +48,7 @@ int CTrans::TransFramwork(CStr2Map &iodat, CStr2Map &urlParams)
 		}
 		if(iodat["retmsg"].empty())
 		{
-			//iodat["retmsg"] = "²Ù×÷³É¹¦";
+			//iodat["retmsg"] = "æ“ä½œæˆåŠŸ";
 			iodat["retmsg"] = "success";
 		}
 

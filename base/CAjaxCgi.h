@@ -5,7 +5,6 @@
 //AjaxCGI CTrans Implementaion header
 ///////////////////////////////////////////
 #include "CTrans.h"
-#include "CExp.h"
 
 #define ROK   1
 #define RFAIL 0
@@ -40,6 +39,7 @@ class CAjaxCgi
 		
         // 初始化日志
 		void InitLog(void);
+        void FreeLog(void);
 		
         // 获取HTTP请求的参数，并按照名字-值对应关系写入CStr2Map类型的变量中。
 		virtual int FetchHttpEnv(void);
@@ -71,6 +71,9 @@ class CAjaxCgi
 
 		// 指向处理器的基类指针。
 		CTrans *m_pTrans;
+		
+        // 存放环境变量
+		CStr2Map m_mEnv;
 
 		// 存放请求和响应的要素内容
 		CStr2Map m_mIODat;

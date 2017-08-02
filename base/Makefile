@@ -1,11 +1,11 @@
 
-INCLUDE = -I./
+INCLUDE = -I./ -I../minixml/source
 
 SRCS_CPP = $(wildcard *.cpp)
 SRCS_C = $(wildcard *.c)
 OBJS = $(patsubst %.cpp, %.o, $(SRCS_CPP)) $(patsubst %.c, %.o, $(SRCS_C))
 
-CFLAGS = -O3 -DNDEBUG -Wall
+CFLAGS = -O2 -DNDEBUG -Wall
 CXX = g++
 CC = g++
 

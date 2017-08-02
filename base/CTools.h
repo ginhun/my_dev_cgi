@@ -26,8 +26,16 @@ typedef map<string,string> CStr2Map;
 
 class CCGITools
 {
-public:
-
+    public:
+        static void ProcInterface(CStr2Map& iodat)
+        {
+            if (iodat["is_interface"] == "true")
+            {
+                string tId = iodat["tid"];
+                iodat.clear();
+                iodat["tid"] = tId;
+            }
+        }
 };
 
 #endif /* CTRANS_H_HEADER_INCLUDED_BB9BF94B */
