@@ -12,21 +12,21 @@
 
 using std::string;
 
-const int ERR_SIZE = 1024;  // ´íÎóĞÅÏ¢³¤¶È
-const int MAX_BUF = 10240; // µ¥ĞĞÈÕÖ¾×î´ó³¤¶È
-const int SHIFT_FREQ = 128;  // ÈÕÖ¾ÇĞ»»Æµ¶È
+const int ERR_SIZE = 1024;  // é”™è¯¯ä¿¡æ¯é•¿åº¦
+const int MAX_BUF = 10240; // å•è¡Œæ—¥å¿—æœ€å¤§é•¿åº¦
+const int SHIFT_FREQ = 128;  // æ—¥å¿—åˆ‡æ¢é¢‘åº¦
 
 class CCftLogger;
 
 /**
- * ÈÕÖ¾Àà
+ * æ—¥å¿—ç±»
  */
 class CCftLogger
 {
 public:
     
     /**
-     * ÈÕÖ¾¼¶±ğ
+     * æ—¥å¿—çº§åˆ«
      */
     enum LOG_LEVEL
     {
@@ -39,153 +39,153 @@ public:
     };
 
     /**
-     * ÈÕÖ¾ÇĞ»»Ä£Ê½
+     * æ—¥å¿—åˆ‡æ¢æ¨¡å¼
      */
     enum SHIFT_MODE
     {
-        _SIZE_MODE = 1,  // °´´óĞ¡ÇĞ»»
-        _DATE_MODE = 2  // °´ÈÕÆÚÇĞ»»
+        _SIZE_MODE = 1,  // æŒ‰å¤§å°åˆ‡æ¢
+        _DATE_MODE = 2  // æŒ‰æ—¥æœŸåˆ‡æ¢
     };
     
 public:
     
     /**
-     * ¹¹Ôìº¯Êı
+     * æ„é€ å‡½æ•°
      */
     CCftLogger(const char* path, int max_size, int max_file = 10,LOG_LEVEL level = _DEBUG, SHIFT_MODE=_SIZE_MODE);
 
     /**
-     * Îö¹¹º¯Êı
+     * ææ„å‡½æ•°
      */
     virtual ~CCftLogger();
 
     /**
-     * ÉèÖÃÈÕÖ¾¼¶±ğ
+     * è®¾ç½®æ—¥å¿—çº§åˆ«
      */
     inline void setLogLevel(LOG_LEVEL level)    { _level = level; }
 
     /**
-     * ÉèÖÃÏûÏ¢ĞòÁĞºÅ
+     * è®¾ç½®æ¶ˆæ¯åºåˆ—å·
      */
     inline void setMsgId(const string& strMsg)      { _msg_id = strMsg; }
 
     /**
-     * ÉèÖÃÎÄ¼şÃûºó×º
+     * è®¾ç½®æ–‡ä»¶ååç¼€
      */
     inline void setSuffix(const string& suffix) { _suffix = suffix; }
 
     /**
-     * »ñÈ¡ÈÕÖ¾ÏµÍ³´íÎóĞÅÏ¢
+     * è·å–æ—¥å¿—ç³»ç»Ÿé”™è¯¯ä¿¡æ¯
      */
     inline const char* getErrorInfo()    { return _szErrInfo; }
 
     /**
-     * ´òÓ¡´íÎólog
+     * æ‰“å°é”™è¯¯log
      */
     int error(const char *fmt, ...);
     
     /**
-     * ´òÓ¡¸æ¾¯log
+     * æ‰“å°å‘Šè­¦log
      */
     int warning(const char *fmt, ...);
     
     /**
-     * ´òÓ¡Õı³£log
+     * æ‰“å°æ­£å¸¸log
      */
     //int normal(const char *fmt, ...);
     int info(const char *fmt, ...);
 
     /**
-     * ´òÓ¡µ÷ÊÔlog
+     * æ‰“å°è°ƒè¯•log
      */
     int debug(const char *fmt, ...);
 
     /**
-     * Ö±½ÓĞ´ÈÕÖ¾
+     * ç›´æ¥å†™æ—¥å¿—
      */
     int raw(const char *fmt, ...);
 
 protected:
     
     /**
-     * ´ò¿ªÎÄ¼ş
+     * æ‰“å¼€æ–‡ä»¶
      */
     int _open();
 
     /**
-     * ¹Ø±Õ
+     * å…³é—­
      */
     void _close();
 
     /**
-     * ÇĞ»»ÈÕÖ¾ÎÄ¼ş
+     * åˆ‡æ¢æ—¥å¿—æ–‡ä»¶
      */
     int _shift();
 
     /**
-     * ¼ÇÂ¼ÈÕÖ¾
+     * è®°å½•æ—¥å¿—
      */
     int _write(const char *szLog, int len);
 
     /**
-     * È·¶¨ÈÕÖ¾ÎÄ¼şÃû
+     * ç¡®å®šæ—¥å¿—æ–‡ä»¶å
      */
     string _file_name(int index=0);
 
 protected:
 
     /**
-     * ÇĞ»»Ä£Ê½
+     * åˆ‡æ¢æ¨¡å¼
      */
     SHIFT_MODE _shift_mode;
     
     /**
-     * ÎÄ¼şÖ¸Õë
+     * æ–‡ä»¶æŒ‡é’ˆ
      */
     int  _fd;
 
     /**
-     * ÎÄ¼şÂ·¾¶
+     * æ–‡ä»¶è·¯å¾„
      */
     string _path;
 
     /**
-     * ×î´óÎÄ¼ş´óĞ¡
+     * æœ€å¤§æ–‡ä»¶å¤§å°
      */
     int _max_size;
 
     /**
-     * ½ø³ÌID
+     * è¿›ç¨‹ID
      */
     int _proc_id;
 
     /**
-     * µ±Ç°ÏµÍ³Ê±¼ä
+     * å½“å‰ç³»ç»Ÿæ—¶é—´
      */
     struct tm _tm_now;
 
     /**
-     * ÏûÏ¢ĞòÁĞºÅ
+     * æ¶ˆæ¯åºåˆ—å·
      */
     string _msg_id;
 
     /**
-     * ÎÄ¼şÃûºó×º
+     * æ–‡ä»¶ååç¼€
      */
     string _suffix;
     
     /**
-     * ×î´óÎÄ¼ş¸öÊı
+     * æœ€å¤§æ–‡ä»¶ä¸ªæ•°
      */
     int _max_file;
 
     /**
-     * ÈÕÖ¾¼¶±ğ
+     * æ—¥å¿—çº§åˆ«
      */
     LOG_LEVEL _level;
 
     /**
-     * »ñÈ¡´íÎóĞÅÏ¢
+     * è·å–é”™è¯¯ä¿¡æ¯
      */
     char _szErrInfo[ERR_SIZE + 1];
 };

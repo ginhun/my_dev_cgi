@@ -20,7 +20,7 @@
 using namespace std;
 
 /*
- * È«¾Ö±äÁ¿
+ * å…¨å±€å˜é‡
  */
 CCftLogger* gPtrSysLog = NULL;
 CCftLogger* gPtrAppLog = NULL;
@@ -29,9 +29,9 @@ string g_strTid = "";
 
 CAjaxCgi::CAjaxCgi(void)
 {
-	gettimeofday(&startTimeVal, NULL); //Æô¶¯Ê±¼ä
+	gettimeofday(&startTimeVal, NULL); //å¯åŠ¨æ—¶é—´
 
-    Init(); // ³õÊ¼»¯
+    Init(); // åˆå§‹åŒ–
 
 	try
 	{
@@ -59,13 +59,13 @@ CAjaxCgi::CAjaxCgi(void)
 	{
         CCGITools::ProcInterface(m_mIODat);
 		m_mIODat["retcode"] = "9999";
-		m_mIODat["retmsg"] = "ÏµÍ³·±Ã¦,ÇëÉÔºòÖØÊÔ";
+		m_mIODat["retmsg"] = "ç³»ç»Ÿç¹å¿™,è¯·ç¨å€™é‡è¯•";
 	}
 }
 
 void CAjaxCgi::Init()
 {
-	// ³õÊ¼»¯ÏµÍ³ÈÕÖ¾Ö¸Õë
+	// åˆå§‹åŒ–ç³»ç»Ÿæ—¥å¿—æŒ‡é’ˆ
 	InitLog();
 	
     m_pTrans = NULL;
@@ -121,7 +121,7 @@ void CAjaxCgi::FreeLog(void)
 
 CAjaxCgi::~CAjaxCgi(void)
 {
-    // Êä³ö·µ»ØÐÅÏ¢
+    // è¾“å‡ºè¿”å›žä¿¡æ¯
     PrintRetMsg();
 
 	if (m_pTrans)
@@ -130,11 +130,11 @@ CAjaxCgi::~CAjaxCgi(void)
 		m_pTrans = NULL;
 	}
 
-	gettimeofday(&endTimeVal, NULL); //ÍË³öÊ±¼ä
+	gettimeofday(&endTimeVal, NULL); //é€€å‡ºæ—¶é—´
 	long long CallTimeBegin = 0, CallTimeEnd = 0, calltime = 0;
 	CallTimeBegin = startTimeVal.tv_sec * 1000000 + startTimeVal.tv_usec;
 	CallTimeEnd = endTimeVal.tv_sec * 1000000 + endTimeVal.tv_usec;
-	calltime = CallTimeEnd - CallTimeBegin; //µ÷ÓÃ»¨·ÑÊ±¼ä
+	calltime = CallTimeEnd - CallTimeBegin; //è°ƒç”¨èŠ±è´¹æ—¶é—´
 
 	gPtrSysLog->debug("Leave ~CAjaxCgi(%s:%d) tid=[%s] cost[%08lld]", __FILE__,
 			__LINE__, g_strTid.c_str(), calltime);

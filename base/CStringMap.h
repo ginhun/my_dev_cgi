@@ -28,21 +28,21 @@ public:
   virtual ~CStringMap(){};
     //##ModelId=44E298120261
     int SnapElement(
-        // ԭʼ����
+        // 原始报文
         string sDigram, 
-        // �ֶηָ���
+        // 字段分隔符
         string sEleSep = "&", 
-        // ����ֵ�ָ���
+        // 名字值分隔符
         string sNvSep = "=");
 
-    // ��MAP��ԭ���ģ�����ָ���ָ���
+    // 从MAP还原报文，可以指定分隔符
     //##ModelId=44E298EB0222
     int GenString(
-        // ԭʼ����
+        // 原始报文
         string &sDigram, 
-        // �ֶηָ���
+        // 字段分隔符
         string sEleSep = "&", 
-        // ����ֵ�ָ���
+        // 名字值分隔符
         string sNvSep = "=");
 
 };

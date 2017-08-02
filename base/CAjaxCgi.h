@@ -14,15 +14,15 @@ class CTrans;
 class CAjaxCgi
 {
 	public:
-		// 1.Êä³öXML±¨ÎÄÍ· 
-		// 2.»ñÈ¡HTTPÇëÇó²ÎÊı
-		// 3.½¨Á¢´¦ÀíÆ÷
-		// 4.Ìá½»´¦Àí
-		// 5.Òì³£Ê±ÉèÖÃretcode&retmsg
+		// 1.è¾“å‡ºXMLæŠ¥æ–‡å¤´ 
+		// 2.è·å–HTTPè¯·æ±‚å‚æ•°
+		// 3.å»ºç«‹å¤„ç†å™¨
+		// 4.æäº¤å¤„ç†
+		// 5.å¼‚å¸¸æ—¶è®¾ç½®retcode&retmsg
 		CAjaxCgi(void);
 
-		// Êä³ö´¦Àí½á¹ûÄÚÈİ
-		// Êä³öXMLÎ²²¿
+		// è¾“å‡ºå¤„ç†ç»“æœå†…å®¹
+		// è¾“å‡ºXMLå°¾éƒ¨
 		virtual ~ CAjaxCgi(void);
 
         inline void SetXmlDump() { m_bXmlDump = true; }
@@ -37,24 +37,24 @@ class CAjaxCgi
 	private:
         void Init();
 		
-        // ³õÊ¼»¯ÈÕÖ¾
+        // åˆå§‹åŒ–æ—¥å¿—
 		void InitLog(void);
         void FreeLog(void);
 		
-        // »ñÈ¡HTTPÇëÇóµÄ²ÎÊı£¬²¢°´ÕÕÃû×Ö-Öµ¶ÔÓ¦¹ØÏµĞ´ÈëCStr2MapÀàĞÍµÄ±äÁ¿ÖĞ¡£
+        // è·å–HTTPè¯·æ±‚çš„å‚æ•°ï¼Œå¹¶æŒ‰ç…§åå­—-å€¼å¯¹åº”å…³ç³»å†™å…¥CStr2Mapç±»å‹çš„å˜é‡ä¸­ã€‚
 		virtual int FetchHttpEnv(void);
 		virtual int FetchQueryString(void);
 
-        // ¸ù¾İ±¨ÎÄÀàĞÍ½¨Á¢´¦ÀíÆ÷¶ÔÏó
+        // æ ¹æ®æŠ¥æ–‡ç±»å‹å»ºç«‹å¤„ç†å™¨å¯¹è±¡
         virtual int CreateHandler(void);
 
-		// Ê¹ÓÃcreatehander·µ»ØµÄ´¦ÀíÆ÷¶ÔÏó
+		// ä½¿ç”¨createhanderè¿”å›çš„å¤„ç†å™¨å¯¹è±¡
 		// pTrans->Commit(mIodat)
 		virtual int CommitTrans(void);
 
         void GetParam(string tmp, CStr2Map& strMap);
    
-        // Êä³ö·µ»ØĞÅÏ¢
+        // è¾“å‡ºè¿”å›ä¿¡æ¯
         void PrintRetMsg();
         void PrintXmlByMap();
         void PrintJsonByMap();
@@ -65,20 +65,20 @@ class CAjaxCgi
         bool m_bStringDump;
         string m_sEncoding;
 
-        //Æô¶¯ºÍ½áÊøÊ±¼ä
+        //å¯åŠ¨å’Œç»“æŸæ—¶é—´
         struct timeval startTimeVal;
         struct timeval endTimeVal;
 
-		// Ö¸Ïò´¦ÀíÆ÷µÄ»ùÀàÖ¸Õë¡£
+		// æŒ‡å‘å¤„ç†å™¨çš„åŸºç±»æŒ‡é’ˆã€‚
 		CTrans *m_pTrans;
 		
-        // ´æ·Å»·¾³±äÁ¿
+        // å­˜æ”¾ç¯å¢ƒå˜é‡
 		CStr2Map m_mEnv;
 
-		// ´æ·ÅÇëÇóºÍÏìÓ¦µÄÒªËØÄÚÈİ
+		// å­˜æ”¾è¯·æ±‚å’Œå“åº”çš„è¦ç´ å†…å®¹
 		CStr2Map m_mIODat;
 
-        // ´æ·ÅURL ÇëÇó²ÎÊı´®
+        // å­˜æ”¾URL è¯·æ±‚å‚æ•°ä¸²
         CStr2Map m_mUrlParams;
 };
 

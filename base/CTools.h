@@ -11,13 +11,13 @@ extern CCftLogger* gPtrAppLog;
 
 enum PASSWD_CTRL_ERR_ID
 {
-	PASSWD_CTRL_ERR_ID_INVALID_LEN = 1, /*���볤����Ч */
-	PASSWD_CTRL_ERR_ID_EXCEED_TIME = 2, /* ʱ����������Чʱ�䷶Χ */
-	PASSWD_CTRL_ERR_ID_ALLOC_MEM = 3, /* �����ڴ�ʧ�� */
-	PASSWD_CTRL_ERR_ID_READ_KEY = 4, /* ��ȡ��Կ�ļ�ʧ�� */
-	PASSWD_CTRL_ERR_ID_DECRYPT_RSA = 5, /* ����ʧ�� */
+	PASSWD_CTRL_ERR_ID_INVALID_LEN = 1, /*密码长度无效 */
+	PASSWD_CTRL_ERR_ID_EXCEED_TIME = 2, /* 时间间隔超过有效时间范围 */
+	PASSWD_CTRL_ERR_ID_ALLOC_MEM = 3, /* 分配内存失败 */
+	PASSWD_CTRL_ERR_ID_READ_KEY = 4, /* 读取密钥文件失败 */
+	PASSWD_CTRL_ERR_ID_DECRYPT_RSA = 5, /* 解密失败 */
 	PASSWD_CTRL_ERR_ID_DERSA_SEED_WRONG = 6,
-/* ����rsa��Ľ����seed ���ⲿseed����� */
+/* 解密rsa后的结果中seed 与外部seed不相符 */
 };
 
 #define VALID_INTERVAL 600

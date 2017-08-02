@@ -14,7 +14,7 @@ int CAjaxCgi::CreateHandler()
 		m_mIODat["tid"] = g_strTid = "test_cgi";
 	}
 
-	m_mIODat["is_interface"] = "true"; //ÊÇ·ñ½Ó¿ÚÀàcgi£¬Èç¹ûÊÇ½Ó¿ÚÀàcgiÊ±ÔÚÊä³öÊ±»áÇå¿ÕÊäÈë²ÎÊıºÍcookie
+	m_mIODat["is_interface"] = "true"; //æ˜¯å¦æ¥å£ç±»cgiï¼Œå¦‚æœæ˜¯æ¥å£ç±»cgiæ—¶åœ¨è¾“å‡ºæ—¶ä¼šæ¸…ç©ºè¾“å…¥å‚æ•°å’Œcookie
 
 	if( m_mIODat["tid"] == string("test_cgi") )
 	{
@@ -22,13 +22,13 @@ int CAjaxCgi::CreateHandler()
 	}
 	else
 	{
-		throw(CTrsExp("98", string("´íÎóÂë98£ºÇëÍ¨Öªwebmaster.[") + m_mIODat["tid"] + string("]")));
+		throw(CTrsExp("98", string("é”™è¯¯ç 98ï¼šè¯·é€šçŸ¥webmaster.[") + m_mIODat["tid"] + string("]")));
 		return 98;
 	}
 
 	if( m_pTrans == NULL )
 	{
-		throw(CTrsExp("97", string("´íÎóÂë97£ºÇëÍ¨Öªwebmaster.[") + m_mIODat["tid"] + string("]")));
+		throw(CTrsExp("97", string("é”™è¯¯ç 97ï¼šè¯·é€šçŸ¥webmaster.[") + m_mIODat["tid"] + string("]")));
 		return 97;
 	}
 	else

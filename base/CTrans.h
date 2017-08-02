@@ -27,7 +27,7 @@ class CTrans
 		const static string LOG_CONFIG_FILE_PATH;
 		CTrans();
 		/*
-		 * 2011-11-22 leungma ÐÞ¸ÄÎªÐéº¯Êý
+		 * 2011-11-22 leungma ä¿®æ”¹ä¸ºè™šå‡½æ•°
 		 */
 		virtual ~CTrans();
 

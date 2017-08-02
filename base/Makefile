@@ -9,7 +9,7 @@ CFLAGS = -O2 -DNDEBUG -Wall
 CXX = g++
 CC = g++
 
-# ×Ô¶¯¼ÆËãÎÄ¼þµÄÒÀÀµ¹ØÏµ
+# è‡ªåŠ¨è®¡ç®—æ–‡ä»¶çš„ä¾èµ–å…³ç³»
 %.o: %.cpp
 	$(CXX) $(CFLAGS) $(INCLUDE) -c $<
 
