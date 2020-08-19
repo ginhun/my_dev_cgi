@@ -71,6 +71,9 @@ int CTestCgi::Commit(CStr2Map& iodat, CStr2Map& urlParams)
 {
     APP_DEBUG("Begin...");
 
+	//for test git
+    APP_DEBUG("test git.");
+
     XmlDemo();
 
     //登录态校验
