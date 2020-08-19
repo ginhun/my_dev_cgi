@@ -73,6 +73,7 @@ int CTestCgi::Commit(CStr2Map& iodat, CStr2Map& urlParams)
 
 	//for test git
     APP_DEBUG("test git.");
+    APP_DEBUG("test git 2.");
 
     XmlDemo();
 
